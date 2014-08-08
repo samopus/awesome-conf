@@ -12,6 +12,7 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 
 -- VOL1 require("volume")
+require("conky")
 
 -- Load Debian menu entries
 require("debian.menu")
@@ -303,7 +304,8 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey }, "p", function() menubar.show() end),
+    awful.key({}, "Pause", function() toggle_conky() end)
 )
 
 clientkeys = awful.util.table.join(
@@ -567,6 +569,14 @@ awful.rules.rules = {
       properties = { tag = tags[1][4] } },
     { rule = { class = "Skype" },
       properties = { tag = tags[1][4] } },
+    { rule = { class = "Conky" },
+      properties = {
+        floating = true,
+        sticky = true,
+        ontop = false,
+        focusable = false,
+        size_hints = {"program_position", "program_size"}
+    } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
