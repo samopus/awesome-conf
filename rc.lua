@@ -15,7 +15,7 @@ local menubar = require("menubar")
 require("conky")
 
 -- Load Debian menu entries
-require("debian.menu")
+-- require("debian.menu")
 
 -- Override awesome.quit when we're using GNOME
 _awesome_quit = awesome.quit
@@ -54,11 +54,11 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/home/spu/.config/awesome/theme/theme.lua")
+beautiful.init("/home/samu/.config/awesome/theme/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "gnome-terminal"
-browser = "chromium"
+terminal = "urxvt"
+browser = "chromium --incognito"
 mail = "thunderbird"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
@@ -115,7 +115,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -167,7 +166,9 @@ mytasklist.buttons = awful.util.table.join(
                                                   instance:hide()
                                                   instance = nil
                                               else
-                                                  instance = awful.menu.clients({ width=250 })
+                                                  instance = awful.menu.clients({
+                                                      theme = { width = 250 }
+                                                  })
                                               end
                                           end),
                      awful.button({ }, 4, function ()
@@ -577,6 +578,8 @@ awful.rules.rules = {
         focusable = false,
         size_hints = {"program_position", "program_size"}
     } },
+		{ rule = { class = "Wine" },
+		properties = { border_width = 0, floating = true } },
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },

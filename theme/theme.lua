@@ -8,7 +8,7 @@
 
 -- {{{ Main
 theme = {}
-theme.wallpaper = "/home/spu/.config/awesome/theme/bg.jpg"
+theme.wallpaper = "/home/samu/.config/awesome/theme/bg.jpg"
 -- }}}
 
 -- {{{ Styles
